@@ -498,6 +498,6 @@ For more documentations, you can see the help in R:
 help("visielse")
 ```
 
-Or you can read the first vignette of the package: [ViSiElse Step by Step](https://cran.csiro.au/web/packages/ViSiElse/ViSiElse.pdf).
+Or you can read the first vignette of the package: [ViSiElse Step by Step](ViSiElSe_Step_by_Step.html).
 
 ##

@@ -337,6 +337,6 @@ For more documentations, you can see the help in R:
 help("visielse")
 ```
 
-Or you can read the secong vignette of the package: [ViSiElse Paper Walkthrough](https://cran.csiro.au/web/packages/ViSiElse/ViSiElse.pdf).
+Or you can read the secong vignette of the package: [ViSiElse Paper Walkthrough](ViSiElSe_Paper_Walkthrough.html).
 
 ##
