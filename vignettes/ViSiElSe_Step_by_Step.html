@@ -7,19 +7,20 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Nastasia Fouret &amp; Elodie Garnier" />
 
-<meta name="date" content="2019-10-02" />
+<meta name="date" content="2019-10-15" />
 
 <title>ViSiElSe Step by Step</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,11 +56,36 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
 <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+
+
 
 </head>
 
@@ -69,14 +95,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">ViSiElSe Step by Step</h1>
-<h4 class="author"><em>Nastasia Fouret &amp; Elodie Garnier</em></h4>
-<h4 class="date"><em>2019-10-02</em></h4>
+<h4 class="author">Nastasia Fouret &amp; Elodie Garnier</h4>
+<h4 class="date">2019-10-15</h4>
 
 
 
 <div id="few-words-about-visielse" class="section level2">
 <h2>Few words about ViSiElse</h2>
-<p>ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was developped to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.</p>
+<p>ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was developed to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.</p>
 </div>
 <div id="section" class="section level2">
 <h2></h2>
@@ -114,7 +140,7 @@ X &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="
 ## 4  4     53         154         78     84   283
 ## 5  5     53         165         74     83   265
 ## 6  6     59         132        114    120   207</code></pre>
-<p>Each value correponds to the time elasped (here, in seconds) between a starting point and the moment of the action. In our coffee example, the starting point is when we began to film he experiment. The first subject took the coffee capsule at 58s to start making his coffee.</p>
+<p>Each value corresponds to the time elapsed (here, in seconds) between a starting point and the moment of the action. In our coffee example, the starting point is when we began to film he experiment. The first subject took the coffee capsule at 58s to start making his coffee.</p>
 </div>
 <div id="first-plot" class="section level2">
 <h2>First plot</h2>
@@ -208,7 +234,7 @@ book</code></pre></div>
 </div>
 <div id="order-of-actions-in-the-process" class="section level3">
 <h3>Order of Actions in the process</h3>
-<p>As explained above, the order is given by the dataset column order. In the ViSibook, the column “showorder” save the order and can be manually changed. The prefered order is the order by which actions are supposed to happen. Changing the “showorder” column will adjust the plotted action order but will not affect calculations.</p>
+<p>As explained above, the order is given by the dataset column order. In the ViSibook, the column “showorder” save the order and can be manually changed. The preferred order is the order by which actions are supposed to happen. Changing the “showorder” column will adjust the plotted action order but will not affect calculations.</p>
 <div id="change-the-order" class="section level4">
 <h4>Change the order</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">book[,<span class="dv">4</span>]&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">3</span>)
@@ -222,7 +248,7 @@ book</code></pre></div>
 <div id="long-actions" class="section level2">
 <h2>Long Actions</h2>
 <p>Until now, we only considered punctual actions. However ViSiElse distinguishes two different types of actions: <strong>punctual and long</strong>. The actions called punctual are brief actions defined as time points, like “Push the button”, they do not last long compared to the time scale (i.e. a one-second-lasting action in an one-hour-lasting process).</p>
-<p>The actions labeled as long (or delays) are the ones defined by a <strong>duration</strong> (i.e. a few-seconds-lasting action in a one-minute-lasting process). Delays or long actions can be helpful to understand a behavior as we can observed subjects performing the same action for different durations. Long action are delimited by <strong>a beginning punctual action and an ending one</strong>. To define a long action, there is no need to change the dataset, only to add a new line in the ViSibook. The column “typeA” in the ViSibook specifies if the action is punctual (“p”) or long (“l”).</p>
+<p>The actions labeled as long (or delays) are the ones defined by a <strong>duration</strong> (i.e. a few-seconds-lasting action in a one-minute-lasting process). Delays or long actions can be helpful to understand a behavior as we can observed subjects performing the same action for different duration. Long action are delimited by <strong>a beginning punctual action and an ending one</strong>. To define a long action, there is no need to change the dataset, only to add a new line in the ViSibook. The column “typeA” in the ViSibook specifies if the action is punctual (“p”) or long (“l”).</p>
 <div id="adding-a-long-action" class="section level4">
 <h4>Adding a long Action</h4>
 <p>Let’s add a long action measuring the duration between filling the machine with the coffee capsule and pushing the button. To do so, we convert the ViSibook into a data.frame and add a new line for this long action.</p>
@@ -239,7 +265,7 @@ book</code></pre></div>
 ## 4            push_B      push_B     p         4   &lt;NA&gt;   &lt;NA&gt;
 ## 5             drink       drink     p         5   &lt;NA&gt;   &lt;NA&gt;
 ## 6 delay_coffee_push Preparation     l         6 coffee push_B</code></pre>
-<p>The columns “deb” and “fin” define the two punctual actions that delimit the long one, “deb” is the begining (here “coffee”) and “fin” the ending (here “push_B”).</p>
+<p>The columns “deb” and “fin” define the two punctual actions that delimit the long one, “deb” is the beginning (here “coffee”) and “fin” the ending (here “push_B”).</p>
 </div>
 <div id="visielse-representation-of-long-actions" class="section level3">
 <h3>ViSiElse representation of long actions</h3>
@@ -261,7 +287,7 @@ book</code></pre></div>
 </ul>
 <div id="green-zone" class="section level4">
 <h4>Green zone</h4>
-<p>Let’s go back to our coffee example and let’s say “fill_coffee” in the machine should be done between 1min and 2min. So for this action, we defined the time limit of the green zone in a new column of the ViSibook; GZDeb for the begining of the green zone and GZFin for its ending. We then use the new ViSibook to create the ViSiElse graph.</p>
+<p>Let’s go back to our coffee example and let’s say “fill_coffee” in the machine should be done between 1min and 2min. So for this action, we defined the time limit of the green zone in a new column of the ViSibook; GZDeb for the beginning of the green zone and GZFin for its ending. We then use the new ViSibook to create the ViSiElse graph.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">book<span class="op">$</span>GZDeb &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">60</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># New column in the ViSibook, the 2nd action &quot;fill_coffee&quot; should be done after 60s</span>
 book<span class="op">$</span>GZFin &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">120</span>, <span class="ot">NA</span>,<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># New column in the ViSibook, the 2nd action &quot;fill_coffee&quot; should be done before 120s</span>
 visi2 &lt;-<span class="st"> </span><span class="kw">visielse</span>(<span class="dt">X =</span> X, <span class="dt">book =</span> book, <span class="dt">informer =</span> <span class="ot">NULL</span>)</code></pre></div>
@@ -270,7 +296,7 @@ visi2 &lt;-<span class="st"> </span><span class="kw">visielse</span>(<span class
 </div>
 <div id="black-zone" class="section level4">
 <h4>1 black zone</h4>
-<p>For punctual actions, 1 or 2 black zones can be defined. For the example, “fill_coffee” in the machine should not be done before 30s. We set the begining (BZBeforeDeb) and the ending (BZBeforeFin) of the back zone in new columns of the ViSibook.</p>
+<p>For punctual actions, 1 or 2 black zones can be defined. For the example, “fill_coffee” in the machine should not be done before 30s. We set the beginning (BZBeforeDeb) and the ending (BZBeforeFin) of the back zone in new columns of the ViSibook.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">book<span class="op">$</span>GZDeb &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># No more green zone</span>
 book<span class="op">$</span>GZFin &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># No more green zone</span>
 book<span class="op">$</span>BZBeforeDeb &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">0</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># New column in the ViSibook, the 2nd action &quot;fill_coffee&quot; should not be done between 0 and 30s</span>
@@ -335,7 +361,7 @@ visi1 &lt;-<span class="st"> </span><span class="kw">visielse</span>(X, <span cl
 <ul>
 <li>“cut”: Each groups is represented one under the other with different colors</li>
 <li>“join”: Groups are spatially mixed but are represented by different colors</li>
-<li>“within”: All individuals are ploted together and underneath it, one group is ploted a second time</li>
+<li>“within”: All individuals are plotted together and underneath it, one group is ploted a second time</li>
 </ul>
 <div id="method-cut" class="section level3">
 <h3>Method : Cut</h3>
@@ -367,13 +393,16 @@ visi1 &lt;-<span class="st"> </span><span class="kw">visielse</span>(X, <span cl
 <p>If you have any questions, you can reach us by email at <a href="mailto:re2simlab@gmail.com">re2simlab@gmail.com</a></p>
 <p>For more documentations, you can see the help in R:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">help</span>(<span class="st">&quot;visielse&quot;</span>)</code></pre></div>
-<p>Or you can read the secong vignette of the package: <a href="ViSiElSe_Paper_Walkthrough.html">ViSiElse Paper Walkthrough</a>.</p>
+<p>Or you can read the second vignette of the package: <a href="ViSiElSe_Paper_Walkthrough.html">ViSiElse Paper Walkthrough</a>.</p>
 </div>
 <div id="section-1" class="section level2">
 <h2></h2>
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

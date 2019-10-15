@@ -7,19 +7,20 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="author" content="Elodie Garnier" />
 
-<meta name="date" content="2019-10-02" />
+<meta name="date" content="2019-10-15" />
 
 <title>ViSiElSe paper: R code walkthrough</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -55,11 +56,36 @@ code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
 code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
 <link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+
+
 
 </head>
 
@@ -69,8 +95,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">ViSiElSe paper: R code walkthrough</h1>
-<h4 class="author"><em>Elodie Garnier</em></h4>
-<h4 class="date"><em>2019-10-02</em></h4>
+<h4 class="author">Elodie Garnier</h4>
+<h4 class="date">2019-10-15</h4>
 
 
 
@@ -84,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <div id="about-visielse-package" class="section level3">
 <h3>About ViSiElse package</h3>
-<p>ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was first developped to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.</p>
+<p>ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was first developed to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.</p>
 <p>A first vignette showing ViSiElse’s step by step process is available <a href="ViSiElSe_Step_by_Step.html">here</a>.</p>
 </div>
 <div id="visielse-setup-and-data-preparation" class="section level2">
@@ -100,8 +126,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3>Data preparation</h3>
 <p>To explain ViSiElse process, we will use 3 different datasets that are all attached to the package:</p>
 <ul>
-<li><p><strong>typDay</strong> dataset: This is the main data that we will use. This dataset shows the actions usually performed during a typical day. The simulated dataset of 100 subjects correspond to the timestamps (in min) of each action of the day, from midnight to midnight. Each value is the time elapse between the begining of the day (midnight) and the execution of the action.</p></li>
-<li><p><strong>intubation</strong> dataset: Time data from a high-fidelity simulation experiment of a neonatal resuscitation with 37 midwive students. The simulation was video recorded and actions required in the intubation process were tagged. This dataset is the execution time (in seconds) of each action performed by the students.</p></li>
+<li><p><strong>typDay</strong> dataset: This is the main data that we will use. This dataset shows the actions usually performed during a typical day. The simulated dataset of 100 subjects correspond to the timestamps (in min) of each action of the day, from midnight to midnight. Each value is the time elapse between the beginning of the day (midnight) and the execution of the action.</p></li>
+<li><p><strong>intubation</strong> dataset: Time data from a high-fidelity simulation experiment of a neonatal resuscitation with 37 midwife students. The simulation was video recorded and actions required in the intubation process were tagged. This dataset is the execution time (in seconds) of each action performed by the students.</p></li>
 <li><p><strong>shoppingBehavior</strong> dataset: This dataset shows the buying process of consumers over internet based on a 5-steps model: need recognition, information search, evaluation, purchase decision, and post-purchase behavior. This simulated dataset of 100 subjects correspond to the timestamps (in s) of each action of the model (except for the post-purchase behavior) executed by the subjects.</p></li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;typDay&quot;</span>) <span class="co"># load typDay dataset</span>
@@ -123,7 +149,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="the-dataset" class="section level3">
 <h3>The dataset</h3>
 <p>ViSiElse explores human or animal behavior during a process or a procedure or any observations that can be divided into actions. For example, the typical day tasks can be divided into the following actions: sleep, wake up, take a shower, eat breakfast, drink the first coffee of the day, start and stop working, lunch break, pick up the kids, cook and eat dinner and then finally go to sleep.</p>
-<p>If we take a look at the data, we can see that the first column is the subject id and each following column is one action of the typical day. <strong>Each value is the time elapse (in min) between the begining of the day (midnight) and the execution of the action.</strong></p>
+<p>If we take a look at the data, we can see that the first column is the subject id and each following column is one action of the typical day. <strong>Each value is the time elapse (in min) between the beginning of the day (midnight) and the execution of the action.</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;typDay&quot;</span>) <span class="co"># load typDay dataset</span>
 <span class="kw">head</span>(typDay) <span class="co"># print first rows</span></code></pre></div>
 <pre><code>##   id start_sleep stop_sleep wake_up shower breakfast start_work
@@ -159,13 +185,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="punctual-and-long-actions" class="section level3">
 <h3>Punctual and long actions</h3>
-<p>ViSiElse differentiate two type of actions (punctual and long). A <strong>punctual action</strong> is an action with no duration, or not lasting long enough to be measured regarding the time scale of the studied behavior. A <strong>long action</strong> is an action having duration defined by two punctual actions, one for its beginning, and one for its ending. For example, the action “sleep” is long —it lasts at least a few hours which is substancial in the scale of a day— while the action “wake up” is punctual —it usually only takes seconds or a few minutes and its duration is not relevant in the scale of a day.</p>
+<p>ViSiElse differentiate two type of actions (punctual and long). A <strong>punctual action</strong> is an action with no duration, or not lasting long enough to be measured regarding the time scale of the studied behavior. A <strong>long action</strong> is an action having duration defined by two punctual actions, one for its beginning, and one for its ending. For example, the action “sleep” is long —it lasts at least a few hours which is substantial in the scale of a day - while the action “wake up” is punctual —it usually only takes seconds or a few minutes and its duration is not relevant in the scale of a day.</p>
 <p>For the typical day example, the list of actions can then be transformed to:</p>
 <ul>
 <li>1- Sleeping — <em>long</em></li>
 <li>2- Wake up — <em>punctual</em></li>
 <li>3- Take a shower — <em>punctual</em></li>
-<li>4- Eat breakfast— <em>punctual</em></li>
+<li>4- Eat breakfast — <em>punctual</em></li>
 <li>5- Start working — <em>punctual</em></li>
 <li>6- Working — <em>long</em></li>
 <li>7- Stop working — <em>punctual</em></li>
@@ -180,7 +206,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="visibook" class="section level3">
 <h3>ViSibook</h3>
 <p>While the dataset contains the raw time data of the studied behavior, the ViSibook contains its <strong>structure</strong>. Mainly, it is a table consisting of the characteristics of every action.</p>
-<p>When runing <code>visielse()</code> function with only the dataset as argument, the ViSibook is automatically generated and can then be extracted from the visielse object. Then, we can use the <code>ConvertFromViSibook()</code> function to transform the ViSibook into a <code>data.frame</code> and modify it.</p>
+<p>When running <code>visielse()</code> function with only the dataset as argument, the ViSibook is automatically generated and can then be extracted from the visielse object. Then, we can use the <code>ConvertFromViSibook()</code> function to transform the ViSibook into a <code>data.frame</code> and modify it.</p>
 <p>Let’s see what the ViSibook from our first plot looks like !</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b1 &lt;-<span class="st"> </span><span class="kw">ConvertFromViSibook</span>(v1<span class="op">@</span>book) <span class="co"># Extract the visibook in a data.frame</span>
 b1 </code></pre></div>
@@ -204,8 +230,8 @@ b1 </code></pre></div>
 <li><strong>vars</strong> : name of the actions. It must be identical to the action names in the dataset</li>
 <li><strong>label</strong> : label of the actions</li>
 <li><strong>typeA</strong> : type of the actions. Either “p” for punctual or “l” for long actions.</li>
-<li><strong>showorder</strong> : action ploted order in the graph. Set to “NA”, the action is not displayed.</li>
-<li><strong>deb</strong> : for long action only, the name of the punctual action that delimit the begining of the long one</li>
+<li><strong>showorder</strong> : action plotted order in the graph. Set to “NA”, the action is not displayed.</li>
+<li><strong>deb</strong> : for long action only, the name of the punctual action that delimit the beginning of the long one</li>
 <li><strong>fin</strong> : for long action only, the name of the punctual action that delimit the end of the long one</li>
 </ul>
 <p>We can now change the labels and add long actions to our graph !</p>
@@ -242,12 +268,12 @@ b1</code></pre></div>
 ## 13   stop_lunch        End of lunch     p        NA        &lt;NA&gt;       &lt;NA&gt;
 ## 3    start_cook       Start cooking     p        NA        &lt;NA&gt;       &lt;NA&gt;
 ## 4     stop_cook       End of dinner     p        NA        &lt;NA&gt;       &lt;NA&gt;</code></pre>
-<p>The long action sleep is defined by the two punctual actions: start_sleep (begining) and stop_sleep (ending). The punctual actions used to define long actions do not need to be displayed so their order is set to “NA”.</p>
+<p>The long action sleep is defined by the two punctual actions: start_sleep (beginning) and stop_sleep (ending). The punctual actions used to define long actions do not need to be displayed so their order is set to “NA”.</p>
 <p>Let’s see the new ViSiElse graph !</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">v2 &lt;-<span class="st"> </span><span class="kw">visielse</span>(typDay, <span class="dt">book =</span> b1, <span class="dt">informer =</span> <span class="ot">NULL</span>, <span class="dt">doplot =</span> F, <span class="dt">pixel =</span> <span class="dv">30</span>)
 <span class="kw">plot</span>(v2, <span class="dt">vp0w =</span> <span class="fl">0.7</span>, <span class="dt">unit.tps =</span> <span class="st">&quot;min&quot;</span>, <span class="dt">scal.unit.tps =</span> <span class="dv">30</span>, <span class="dt">main =</span> <span class="st">&quot;Typical day&quot;</span>) </code></pre></div>
 <p><img src="data:image/png;base64,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" /><!-- --></p>
-<p>Long actions are displayed by one line per subject with a size porportional to the duration of the action and the lines are sorted by their starting time.</p>
+<p>Long actions are displayed by one line per subject with a size proportional to the duration of the action and the lines are sorted by their starting time.</p>
 <p>NB1: As long actions are delimited by punctual actions, no additional data are required in the dataset. <code>visielse()</code> automatically computes the duration of long actions.</p>
 <p>NB2: In the <code>visielse()</code> function, <em>doplot</em> is set to FALSE as the ViSiElse graph is displayed by the <code>plot()</code> function. Using <code>plot()</code> allows the access to more formatting options. For example, changing the units of the x-axis (in s by default) or the name of the graph.</p>
 </div>
@@ -501,8 +527,8 @@ v19 &lt;-<span class="st"> </span><span class="kw">visielse</span>(shoppingBehav
 <h2>4- Additional informations</h2>
 <div id="arguments-and-options-management" class="section level3">
 <h3>Arguments and options management</h3>
-<p>ViSiElse’s options are accessible through the ViSibook for all the actions characteristics (names, labels, types, order, delimitations and green and black zones), through the arguments of the <code>visielse()</code> function for all the analysis features (time scale, groups, statistics) and through the arguments of the <code>plot()</code> function for all the formatting options.</p>
-<p>Fomatting options include:</p>
+<p>ViSiElse’s options are accessible through the ViSibook for all the actions characteristics (names, labels, types, order, long action delimitations and green and black zones), through the arguments of the <code>visielse()</code> function for all the analysis features (time scale, groups, statistics) and through the arguments of the <code>plot()</code> function for all the formatting options.</p>
+<p>Formatting options include:</p>
 <ul>
 <li><strong>scal.unit.tps</strong> : time interval value</li>
 <li><strong>unit.tps</strong> : time unit (s, min,…)</li>
@@ -521,7 +547,7 @@ v19 &lt;-<span class="st"> </span><span class="kw">visielse</span>(shoppingBehav
 <div id="visielse-like-plot-with-ggplot2-package" class="section level3">
 <h3>ViSiElse-like plot with ggplot2 package</h3>
 <p>In ggplot2 package, the closest graph type to ViSiElse is the <code>geom_tile()</code> function (heatmap). Thanks to ggplot2 flexible formatting options, the graph can be design as ViSiElse. However it requires to transform the dataset.</p>
-<p>First, the time data should be turned into a frequency table calculating how many subjects performed the action in the time interval. Then, the data should be reshaped to match ggplot2 required data structure. Finally, to match ViSiElse style, 0 values in the dataset should be set to “NA”. With this trick, we can plot “NA” values in white in the formating options of ggplot2.</p>
+<p>First, the time data should be turned into a frequency table calculating how many subjects performed the action in the time interval. Then, the data should be reshaped to match ggplot2 required data structure. Finally, to match ViSiElse style, 0 values in the dataset should be set to “NA”. With this trick, we can plot “NA” values in white in the formatting options of ggplot2.</p>
 <p>Let’s see the modified dataset !</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># load the packages</span>
 <span class="kw">library</span>(ggplot2) <span class="co"># for the heatmap</span>
@@ -588,6 +614,9 @@ typDay2<span class="op">$</span>value[typDay2<span class="op">$</span>value <spa
 <h2></h2>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
