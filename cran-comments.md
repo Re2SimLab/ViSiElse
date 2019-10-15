@@ -1,6 +1,5 @@
-This is a patch to fix the use of deprecated function rBind and fix an
-issue when plotting means. There is also a change in maintainer for this
-package.
+This is a patch to update the package documentation (additional vignette) and
+update the maintainer e-mail address.
 
 R CMD check results
 -------------------

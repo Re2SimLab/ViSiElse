@@ -29,7 +29,7 @@ data(typDay)
 This dataset shows the actions usually performed during a typical day. 
 The simulated dataset of 100 subjects correspond to the timestamps (in min)
 of each action of the day, from midnight to midnight. Each value is the time
-elapse between the begining of the day (midnight) and the execution of the
+elapse between the beginning of the day (midnight) and the execution of the
 action.
 }
 \examples{

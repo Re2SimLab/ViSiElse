@@ -12,13 +12,13 @@ vignette: >
 ---
 title: "ViSiElSe Step by Step"
 author: "Nastasia Fouret & Elodie Garnier"
-date: "1st october 2019"
+date: "1st October 2019"
 output: html_vignette
 ---
 
 ## Few words about ViSiElse
 
-ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was developped to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.
+ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was developed to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.
 
 ##
 
@@ -55,7 +55,7 @@ X <- data.frame(id = seq(1,10), coffee, fill_coffee, fill_water, push_B, drink)
 head(X)
 ```
 
-Each value correponds to the time elasped (here, in seconds) between a starting point and the moment of the action. In our coffee example, the starting point is when we began to film he experiment. The first subject took the coffee capsule at 58s to start making his coffee.
+Each value corresponds to the time elapsed (here, in seconds) between a starting point and the moment of the action. In our coffee example, the starting point is when we began to film he experiment. The first subject took the coffee capsule at 58s to start making his coffee.
 
 ## First plot
 
@@ -152,7 +152,7 @@ visi1 <- visielse(X, book = book, is.ViSibook = TRUE, informer = NULL)
 
 
 ### Order of Actions in the process
-As explained above, the order is given by the dataset column order. In the ViSibook, the column "showorder" save the order and can be manually changed. The prefered order is the order by which actions are supposed to happen. Changing the "showorder" column will adjust the plotted action order but will not affect calculations.
+As explained above, the order is given by the dataset column order. In the ViSibook, the column "showorder" save the order and can be manually changed. The preferred order is the order by which actions are supposed to happen. Changing the "showorder" column will adjust the plotted action order but will not affect calculations.
 
 #### Change the order
 ```{r,fig.show='asis',fig.width=7, fig.height=1.5, warning=FALSE}
@@ -167,7 +167,7 @@ visi1 <- visielse(X, book = book, is.ViSibook = TRUE)
 
 Until now, we only considered punctual actions. However ViSiElse distinguishes two different types of actions: __punctual and long__. The actions called punctual are brief actions defined as time points, like "Push the button", they do not last long compared to the time scale (i.e. a one-second-lasting action in an one-hour-lasting process). 
 
-The actions labeled as long (or delays) are the ones defined by a __duration__ (i.e. a few-seconds-lasting action in a one-minute-lasting process). Delays or long actions can be helpful to understand a behavior as we can observed subjects performing the same action for different durations. Long action are delimited by __a beginning punctual action and an ending one__. To define a long action, there is no need to change the dataset, only to add a new line in the ViSibook. The column "typeA" in the ViSibook specifies if the action is punctual ("p") or long ("l").
+The actions labeled as long (or delays) are the ones defined by a __duration__ (i.e. a few-seconds-lasting action in a one-minute-lasting process). Delays or long actions can be helpful to understand a behavior as we can observed subjects performing the same action for different duration. Long action are delimited by __a beginning punctual action and an ending one__. To define a long action, there is no need to change the dataset, only to add a new line in the ViSibook. The column "typeA" in the ViSibook specifies if the action is punctual ("p") or long ("l").
 
 
 #### Adding a long Action
@@ -182,7 +182,7 @@ book[6, ] <- add_delay # Add the long action at the end of the ViSibook
 book
 ```
 
-The columns "deb" and "fin" define the two punctual actions that delimit the long one, "deb" is the begining (here "coffee") and "fin" the ending (here "push_B").
+The columns "deb" and "fin" define the two punctual actions that delimit the long one, "deb" is the beginning (here "coffee") and "fin" the ending (here "push_B").
 
 ### ViSiElse representation of long actions
 
@@ -208,7 +208,7 @@ For punctual actions, ViSiElse can display one green zone and two black zones. T
 
 #### Green zone
 
-Let's go back to our coffee example and let's say "fill_coffee" in the machine should be done between 1min and 2min. So for this action, we defined the time limit of the green zone in a new column of the ViSibook; GZDeb for the begining of the green zone and GZFin for its ending.
+Let's go back to our coffee example and let's say "fill_coffee" in the machine should be done between 1min and 2min. So for this action, we defined the time limit of the green zone in a new column of the ViSibook; GZDeb for the beginning of the green zone and GZFin for its ending.
 We then use the new ViSibook to create the ViSiElse graph.
 
 ```{r,fig.show='asis',fig.width=7, fig.height=5, warning=FALSE}
@@ -222,7 +222,7 @@ As the coffee dataset is in seconds, all time limits must also be in seconds. If
 #### 1 black zone
 
 For punctual actions, 1 or 2 black zones can be defined. For the example, "fill_coffee" in the machine should not be done before 30s.
-We set the begining (BZBeforeDeb) and the ending (BZBeforeFin) of the back zone in new columns of the ViSibook.
+We set the beginning (BZBeforeDeb) and the ending (BZBeforeFin) of the back zone in new columns of the ViSibook.
 
 ```{r,fig.show='asis',fig.width=7, fig.height=5, warning=FALSE}
 book$GZDeb <- c(NA, NA, NA, NA, NA, NA) # No more green zone
@@ -298,7 +298,7 @@ ViSiElse proposes three methods to plot groups:
 
    * "cut": Each groups is represented one under the other with different colors
    * "join": Groups are spatially mixed but are represented by different colors
-   * "within": All individuals are ploted together and underneath it, one group is ploted a second time
+   * "within": All individuals are plotted together and underneath it, one group is ploted a second time
 
 ### Method : Cut
 Each groups is represented one under the other.
@@ -337,6 +337,6 @@ For more documentations, you can see the help in R:
 help("visielse")
 ```
 
-Or you can read the secong vignette of the package: [ViSiElse Paper Walkthrough](ViSiElSe_Paper_Walkthrough.html).
+Or you can read the second vignette of the package: [ViSiElse Paper Walkthrough](ViSiElSe_Paper_Walkthrough.html).
 
 ##

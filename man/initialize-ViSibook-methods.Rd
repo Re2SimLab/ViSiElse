@@ -18,13 +18,13 @@
 
 \item{typeA}{Vector storing type of actions, "l" for long actions, "p" for punctual actions.}
 
-\item{showorder}{Vector storing order in which actions will be plotted. showorder should be "NA" for actions not to be ploted.}
+\item{showorder}{Vector storing order in which actions will be plotted. showorder should be "NA" for actions not to be plotted.}
 
 \item{deb}{Vector storing, for long actions, the punctual action names that corresponds to its start.}
 
 \item{fin}{Vector storing, for long actions, the punctual action names that corresponds to its end.}
 
-\item{GZDeb}{Vector storing punctuals actions green zone starting time.}
+\item{GZDeb}{Vector storing punctual actions green zone starting time.}
 
 \item{GZFin}{Vector storing punctual action green zone ending time.}
 

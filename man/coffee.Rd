@@ -19,8 +19,8 @@ data(coffee)
 \description{
 This dataset shows the actions required to make coffee. 
 The simulated dataset of 10 subjects correspond to the timestamps (in s)
-of each action. Each value is the time elapse between the begining of the 
-coffee process and the executin of an action.
+of each action. Each value is the time elapse between the beginning of the 
+coffee process and the execution of an action.
 }
 \examples{
 data(coffee)

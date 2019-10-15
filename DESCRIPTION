@@ -24,7 +24,9 @@ Imports:
     chron (>= 2.3-46),
     Matrix (>= 1.2-0),
     colorspace (>= 1.2-6),
-    stringr (>= 1.0.0)
+    stringr (>= 1.0.0),
+    ggplot2,
+    reshape2
 Suggests: knitr, rmarkdown
 LazyData: true
 RoxygenNote: 6.1.0

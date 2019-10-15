@@ -74,7 +74,7 @@ NULL
 #' @slot vars a vector storing names of actions.
 #' @slot label a vector storing brief description of actions.
 #' @slot typeA a vector storing type of actions, "l" for long actions ( which have a stating time and an ending time ), "p" for punctual actions.
-#' @slot showorder a vector storing order in which actions will be plotted. When an action should not be ploted,
+#' @slot showorder a vector storing order in which actions will be plotted. When an action should not be plotted,
 #'  \code{showorder} should be \code{NA}.
 #' @slot deb a vector. \itemize{
 #' \item{Long actions}{ \code{deb} stores the punctual action names that delimit the long actions beginning.}

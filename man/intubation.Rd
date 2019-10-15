@@ -19,7 +19,7 @@ data(intubation)
 }
 \description{
 Time data from a high-fidelity simulation experiment of a neonatal resuscitation
-with 37 midwive students. The simulation was video recorded and actions 
+with 37 midwife students. The simulation was video recorded and actions 
 required in the intubation process were tagged. This dataset is the execution
 time (in seconds) of each action performed by the students.
 }

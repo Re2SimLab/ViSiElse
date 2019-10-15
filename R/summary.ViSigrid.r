@@ -7,7 +7,7 @@
 #' @docType methods
 #' @param object a ViSigrid.
 #' @return list \itemize{
-#' \item{ \strong{ punctuals} }{ summary of punctual actions (typeA=="p").}
+#' \item{ \strong{ punctual} }{ summary of punctual actions (typeA=="p").}
 #' \item{ \strong{ longs} }{  summary of long actions (typeA=="p"). }
 #' }
 #' @seealso \code{\linkS4class{ViSigrid}}, \code{\link{visielse}},\code{\linkS4class{ViSibook}}.

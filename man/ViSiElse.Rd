@@ -123,7 +123,7 @@ white circles linked by a line. For long action, only a black line is plotted st
 the median (or mean) value of the punctual action staring times. The line length represents
 the median (or mean) of the long action duration.
 Informers are computed directly on the given matrix for punctual action.
-And for long actions, it is based on the difference between the punctual action definig its beginning and the one defining its ending.
+And for long actions, it is based on the difference between the punctual action defining its beginning and the one defining its ending.
 }
 \item{ \code{tests} and \code{threshold.test}}{
 

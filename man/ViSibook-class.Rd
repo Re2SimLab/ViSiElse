@@ -17,7 +17,7 @@ Class \code{ViSibook} defines the structure of the process to be plotted.
 
 \item{\code{typeA}}{a vector storing type of actions, "l" for long actions ( which have a stating time and an ending time ), "p" for punctual actions.}
 
-\item{\code{showorder}}{a vector storing order in which actions will be plotted. When an action should not be ploted,
+\item{\code{showorder}}{a vector storing order in which actions will be plotted. When an action should not be plotted,
 \code{showorder} should be \code{NA}.}
 
 \item{\code{deb}}{a vector. \itemize{

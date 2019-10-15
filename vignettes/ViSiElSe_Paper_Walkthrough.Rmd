@@ -12,7 +12,7 @@ vignette: >
 ---
 title: "ViSiElSe paper: R code walkthrough"
 author: "Elodie Garnier"
-date: "1st october 2019"
+date: "1st October 2019"
 output: html_vignette
 ---
 
@@ -27,7 +27,7 @@ This vignette is organized as the R code in 4 parts:
 
 ### About ViSiElse package
 
-ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was first developped to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.
+ViSiElse is a graphical tool designed to visualize behavioral observations over time. Based on raw time data extracted from video recorded sessions of experimental observations, ViSiElse grants a global overview of a process by combining the visualization of multiple actions timestamps for all participants in a single graph. Individuals and/or group behavior can easily be assessed. For example, ViSiElse was first developed to visualize the actions performed by caregivers during simulated medical procedures in order to get insights of their behavior. Supplementary features allow users to further inspect their data by adding summary statistics (mean, standard deviation, quantile or statistical test) and/or time constraints to check the accuracy of the realized actions.
 
 A first vignette showing ViSiElse's step by step process is available [here](ViSiElSe_Step_by_Step.html).
 
@@ -50,9 +50,9 @@ The installation is done once. All future use of ViSiElse will only require to l
 
 To explain ViSiElse process, we will use 3 different datasets that are all attached to the package:
 
-  * __typDay__ dataset: This is the main data that we will use. This dataset shows the actions usually performed during a typical day. The simulated dataset of 100 subjects correspond to the timestamps (in min) of each action of the day, from midnight to midnight. Each value is the time elapse between the begining of the day (midnight) and the execution of the action.
+  * __typDay__ dataset: This is the main data that we will use. This dataset shows the actions usually performed during a typical day. The simulated dataset of 100 subjects correspond to the timestamps (in min) of each action of the day, from midnight to midnight. Each value is the time elapse between the beginning of the day (midnight) and the execution of the action.
 
-  * __intubation__ dataset: Time data from a high-fidelity simulation experiment of a neonatal resuscitation with 37 midwive students. The simulation was video recorded and actions required in the intubation process were tagged. This dataset is the execution time (in seconds) of each action performed by the students.
+  * __intubation__ dataset: Time data from a high-fidelity simulation experiment of a neonatal resuscitation with 37 midwife students. The simulation was video recorded and actions required in the intubation process were tagged. This dataset is the execution time (in seconds) of each action performed by the students.
 
   * __shoppingBehavior__ dataset: This dataset shows the buying process of consumers over internet based on a 5-steps model: need recognition, information search, evaluation, purchase decision, and post-purchase behavior. This simulated dataset of 100 subjects correspond to the timestamps (in s) of each action of the model (except for the post-purchase behavior) executed by the subjects.
 
@@ -79,7 +79,7 @@ In this section, we will focus on the typical day dataset. All ViSiElse features
 
 ViSiElse explores human or animal behavior during a process or a procedure or any observations that can be divided into actions. For example, the typical day tasks can be divided into the following actions: sleep, wake up, take a shower, eat breakfast, drink the first coffee of the day, start and stop working, lunch break, pick up the kids, cook and eat dinner and then finally go to sleep. 
 
-If we take a look at the data, we can see that the first column is the subject id and each following column is one action of the typical day. __Each value is the time elapse (in min) between the begining of the day (midnight) and the execution of the action.__
+If we take a look at the data, we can see that the first column is the subject id and each following column is one action of the typical day. __Each value is the time elapse (in min) between the beginning of the day (midnight) and the execution of the action.__
 
 ```{r, warning=FALSE}
 data("typDay") # load typDay dataset
@@ -97,20 +97,20 @@ The dataset is the only required argument to run `visielse()` function. Let's pl
 v1 <- visielse(typDay, informer = NULL) # informer = NULL removes the summary statitics that are displayed by default (we will talk about it later).
 ```
 
-On the graph, actions are organized one under the other (y-axis) and their executions are distributed along the time axis (x-axis). A drawn rectangle means that at least one subject has done the action in the interval of time. The size of the time interval is set by the breaks of the time axis (here every 30 min from midnight to midnight). The color’s intensity of the rectangles is proportional to the number of individuals who realized the action during the time interval.
+On the graph, actions are organized one under the other (y-axis) and their executions are distributed along the time axis (x-axis). A drawn rectangle means that at least one subject has done the action in the interval of time. The size of the time interval is set by the breaks of the time axis (here every 30 min from midnight to midnight). The color's intensity of the rectangles is proportional to the number of individuals who realized the action during the time interval.
 
 In the legend, we can notice that there are two sections: punctual action and long action. What are punctual and long actions ?
 
 ### Punctual and long actions
 
-ViSiElse differentiate two type of actions (punctual and long). A __punctual action__ is an action with no duration, or not lasting long enough to be measured regarding the time scale of the studied behavior. A __long action__ is an action having duration defined by two punctual actions, one for its beginning, and one for its ending. For example, the action “sleep” is long —it lasts at least a few hours which is substancial in the scale of a day— while the action “wake up” is punctual —it usually only takes seconds or a few minutes and its duration is not relevant in the scale of a day.
+ViSiElse differentiate two type of actions (punctual and long). A __punctual action__ is an action with no duration, or not lasting long enough to be measured regarding the time scale of the studied behavior. A __long action__ is an action having duration defined by two punctual actions, one for its beginning, and one for its ending. For example, the action "sleep" is long —it lasts at least a few hours which is substantial in the scale of a day - while the action "wake up" is punctual —it usually only takes seconds or a few minutes and its duration is not relevant in the scale of a day.
 
 For the typical day example, the list of actions can then be transformed to:
 
   * 1-	Sleeping — _long_
   * 2-	Wake up — _punctual_
   * 3-	Take a shower — _punctual_
-  * 4-	Eat breakfast— _punctual_
+  * 4-	Eat breakfast — _punctual_
   * 5-	Start working — _punctual_
   * 6-	Working — _long_
   * 7-	Stop working — _punctual_
@@ -126,7 +126,7 @@ Now, to visualize both punctual and long actions with ViSiElse, we need a new ar
 
 While the dataset contains the raw time data of the studied behavior, the ViSibook contains its __structure__. Mainly, it is a table consisting of the characteristics of every action. 
 
-When runing `visielse()` function with only the dataset as argument, the ViSibook is automatically generated and can then be extracted from the visielse object. Then, we can use the `ConvertFromViSibook()` function to transform the ViSibook into a `data.frame` and modify it.
+When running `visielse()` function with only the dataset as argument, the ViSibook is automatically generated and can then be extracted from the visielse object. Then, we can use the `ConvertFromViSibook()` function to transform the ViSibook into a `data.frame` and modify it.
 
 Let's see what the ViSibook from our first plot looks like !
 
@@ -140,8 +140,8 @@ The minimum structure of a ViSibook is :
   * __vars__ : name of the actions. It must be identical to the action names in the dataset
   * __label__ : label of the actions
   * __typeA__ : type of the actions. Either "p" for punctual or "l" for long actions.
-  * __showorder__ : action ploted order in the graph. Set to "NA", the action is not displayed.
-  * __deb__ : for long action only, the name of the punctual action that delimit the begining of the long one
+  * __showorder__ : action plotted order in the graph. Set to "NA", the action is not displayed.
+  * __deb__ : for long action only, the name of the punctual action that delimit the beginning of the long one
   * __fin__ : for long action only, the name of the punctual action that delimit the end of the long one
   
 We can now change the labels and add long actions to our graph !
@@ -163,7 +163,7 @@ b1 <- b1[order(as.numeric(b1$showorder)), ] # re-order the ViSibook according to
 b1
 ```
 
-The long action sleep is defined by the two punctual actions: start_sleep (begining) and stop_sleep (ending).
+The long action sleep is defined by the two punctual actions: start_sleep (beginning) and stop_sleep (ending).
 The punctual actions used to define long actions do not need to be displayed so their order is set to "NA".
 
 Let's see the new ViSiElse graph !
@@ -173,7 +173,7 @@ v2 <- visielse(typDay, book = b1, informer = NULL, doplot = F, pixel = 30)
 plot(v2, vp0w = 0.7, unit.tps = "min", scal.unit.tps = 30, main = "Typical day") 
 ```
 
-Long actions are displayed by one line per subject with a size porportional to the duration of the action and the lines are sorted by their starting time. 
+Long actions are displayed by one line per subject with a size proportional to the duration of the action and the lines are sorted by their starting time. 
 
 NB1: As long actions are delimited by punctual actions, no additional data are required in the dataset. `visielse()` automatically computes the duration of long actions.
 
@@ -207,9 +207,9 @@ The pixel parameter must be chosen carefully.
 
 ViSiElse enables the differentiation of two subsets of participants through color distinction. Distinguishing experimental groups of participants is useful to identify different patterns of behavior. In the typical day dataset, we created two groups: people who employ a babysitter (in blue) and people who do not (in pink). To display groups with ViSiElse, users simply specify the _group_ and the _method_ arguments in the `visielse()` function. The first argument is a vector containing the group distribution for each individual. The second argument is the name of the chosen visualization method. ViSiElse provides three methods to plot groups:
 
-  *	The __“cut”__ method where each group is represented one under the other with different colors
-  *	The __“join”__ method where groups are spatially mixed but are differentiated by distinct colors
-  *	The __“within”__ method where all data are plotted together in blue and one of the groups is plotted again in pink
+  *	The __"cut"__ method where each group is represented one under the other with different colors
+  *	The __"join"__ method where groups are spatially mixed but are differentiated by distinct colors
+  *	The __"within"__ method where all data are plotted together in blue and one of the groups is plotted again in pink
   
 ```{r,fig.show='asis',fig.width=7, fig.height=5, warning=FALSE}
 # Group definition
@@ -238,7 +238,7 @@ v7 <- visielse(typDay, book = b1, informer = NULL, group = group, method = "with
 plot(v7, vp0w = 0.7, unit.tps = "min", scal.unit.tps = 30, main = "Typical day, 'within' method")
 ```
 
-This visualization allows users to examine a specific group behavior against the global population. As the ViSiElse package only allows two colors of distinction, the “within” method is the most suitable option for data containing more than two groups. Users can confront each group, one after the other, to the global population and identify their differences.
+This visualization allows users to examine a specific group behavior against the global population. As the ViSiElse package only allows two colors of distinction, the "within" method is the most suitable option for data containing more than two groups. Users can confront each group, one after the other, to the global population and identify their differences.
 
 ### Time constraints: Green and black zones
 
@@ -303,7 +303,7 @@ Black zones for long actions are drawn by a dark blue at the end of the lines. F
 
 ### Statistics
 
-To complete the ViSiElse’s graph and analyze the behavioral data tendency, __summary statistics__ can be added with the _informer_ argument of the `visielse()` function. Users can choose between plotting the mean and standard deviation or the median with the first and third quartiles. 
+To complete the ViSiElse's graph and analyze the behavioral data tendency, __summary statistics__ can be added with the _informer_ argument of the `visielse()` function. Users can choose between plotting the mean and standard deviation or the median with the first and third quartiles. 
 
 ```{r,fig.show='asis',fig.width=7, fig.height=5, warning=FALSE}
 # Mean + standard deviation #
@@ -314,7 +314,7 @@ v10 <- visielse(typDay, book = b1, informer = "median", tests = F, pixel = 30, d
 plot(v10, vp0w = 0.7, unit.tps = "min", scal.unit.tps = 30, main = "Typical day, median + IQR") 
 ```
 
-Moreover, if the data contains groups and summary statistics are defined, ViSiElse computes a statistical test to compare the time data between the two groups. If the _informer_ parameter is set to mean and standard deviation, ViSiElse runs a Wilcoxon test; if the _informer_ parameter is set to median and quartiles, ViSiElse runs a Mood’s two-sample test. An asterisk appears on the right side of the graph if the statistical test is significant with a 0.01 alpha risk (default value). The alpha risk could be manually set. 
+Moreover, if the data contains groups and summary statistics are defined, ViSiElse computes a statistical test to compare the time data between the two groups. If the _informer_ parameter is set to mean and standard deviation, ViSiElse runs a Wilcoxon test; if the _informer_ parameter is set to median and quartiles, ViSiElse runs a Mood's two-sample test. An asterisk appears on the right side of the graph if the statistical test is significant with a 0.01 alpha risk (default value). The alpha risk could be manually set. 
 
 ```{r,fig.show='asis',fig.width=7, fig.height=5, warning=FALSE}
 # Statistical test between groups #
@@ -334,14 +334,14 @@ ViSiElse was originally developed to visualize behavioral data extracted from vi
 
   * 1-	Decision to intubate — _punctual_
   * 2-	Stop mask ventilation — _punctual_
-  * 3-	Insert the laryngoscope blade in the patient’s mouth — _punctual_
+  * 3-	Insert the laryngoscope blade in the patient's mouth — _punctual_
   * 4-	Insert the endotracheal tube — _punctual_
-  * 5-	Remove the laryngoscope blade out of the patient’s mouth — _punctual_
+  * 5-	Remove the laryngoscope blade out of the patient's mouth — _punctual_
   * 6-	Restart to ventilate the patient through the tube — _punctual_
   * 7-	Duration of the laryngoscope use — _long_
   * 8-	Total duration of the intubation process — _long_
   
-EI, as most of the medical procedures, follows __guidelines__ set by local or international committees. For the neonatal resuscitation procedure, the International Liaison Committee on Resuscitation (ILCOR) sets the guidelines that caregivers should follow, including those for EI. ILCOR recommendations state that the intubation should not occur during the first minute of life. An appropriate time for the insertion of the laryngoscope blade in the newborn’s mouth is between 120 and 210 seconds.
+EI, as most of the medical procedures, follows __guidelines__ set by local or international committees. For the neonatal resuscitation procedure, the International Liaison Committee on Resuscitation (ILCOR) sets the guidelines that caregivers should follow, including those for EI. ILCOR recommendations state that the intubation should not occur during the first minute of life. An appropriate time for the insertion of the laryngoscope blade in the newborn's mouth is between 120 and 210 seconds.
 
 Let's create the ViSiElse graph !
 
@@ -372,7 +372,7 @@ v17 <- visielse(intubation, book = b3, informer = "median", doplot = F)
 plot(v17, scal.unit.tps = 20, rcircle = 8, vp0h = 0.65, vp0w = 0.7, Fontsize.label.Action = 9, Fontsize.label.Time = 9, Fontsize.label.color = 9, main = "Intubation process in neonatal resuscitation algorithm")
 ```
 
-In the graph, thanks to the long action “intubation duration”, we see that midwives performed the EI heterogeneously during the neonatal resuscitation. Some midwives intubate early in the resuscitation while others only start after 4 min. ViSiElse allows a graphical inspection of the adequacy to the recommendations. For training processes, ViSiElse provides a visual assessment of the performance of caregivers.
+In the graph, thanks to the long action "intubation duration", we see that midwives performed the EI heterogeneously during the neonatal resuscitation. Some midwives intubate early in the resuscitation while others only start after 4 min. ViSiElse allows a graphical inspection of the adequacy to the recommendations. For training processes, ViSiElse provides a visual assessment of the performance of caregivers.
 
 NB: We can note the additional formatting options used in the `plot()` function.
 
@@ -407,9 +407,9 @@ With ViSiElse, researchers can visually assess the differences in online shoppin
 
 ### Arguments and options management
 
-ViSiElse’s options are accessible through the ViSibook for all the actions characteristics (names, labels, types, order, delimitations and green and black zones), through the arguments of the `visielse()` function for all the analysis features (time scale, groups, statistics) and through the arguments of the `plot()` function for all the formatting options.
+ViSiElse's options are accessible through the ViSibook for all the actions characteristics (names, labels, types, order, long action delimitations and green and black zones), through the arguments of the `visielse()` function for all the analysis features (time scale, groups, statistics) and through the arguments of the `plot()` function for all the formatting options.
 
-Fomatting options include:
+Formatting options include:
 
   * __scal.unit.tps__ : time interval value
   * __unit.tps__ : time unit (s, min,...)
@@ -429,7 +429,7 @@ The complete list is available in the documentation of the `plot-ViSigrid-method
 
 In ggplot2 package, the closest graph type to ViSiElse is the `geom_tile()` function (heatmap). Thanks to ggplot2 flexible formatting options, the graph can be design as ViSiElse. However it requires to transform the dataset.
 
-First, the time data should be turned into a frequency table calculating how many subjects performed the action in the time interval. Then, the data should be reshaped to match ggplot2 required data structure. Finally, to match ViSiElse style, 0 values in the dataset should be set to "NA". With this trick, we can plot "NA" values in white in the formating options of ggplot2.
+First, the time data should be turned into a frequency table calculating how many subjects performed the action in the time interval. Then, the data should be reshaped to match ggplot2 required data structure. Finally, to match ViSiElse style, 0 values in the dataset should be set to "NA". With this trick, we can plot "NA" values in white in the formatting options of ggplot2.
 
 Let's see the modified dataset !
 
@@ -485,7 +485,7 @@ The visual output is very close to ViSiElse as the gradient was modified to matc
 
 However, we can see that only punctual actions are displayed. Indeed, the main drawback of using `geom_tile()` is that heatmaps do not provide long actions visualization which can be critical. Plotting long actions instead of just the punctual actions (i.e. start and end time) can useful when the duration of actions matter. 
 
-In our intubation example, the act of intubation should be as fast as possible considering that the newborn does not receive any oxygen during the procedure. If we only see the start and end time of the intubation, we would not be able to visualize the duration of the intubation. Indeed, for punctual actions, individuals are pulled together so we cannot link a start time to its end time: some might start early and finish early, others might start early but finish late or start late and finish late… 
+In our intubation example, the act of intubation should be as fast as possible considering that the newborn does not receive any oxygen during the procedure. If we only see the start and end time of the intubation, we would not be able to visualize the duration of the intubation. Indeed, for punctual actions, individuals are pulled together so we cannot link a start time to its end time: some might start early and finish early, others might start early but finish late or start late and finish late...
 
 In addition, heatmaps also do not allow groups or time constraints visualization. 
 

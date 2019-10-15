@@ -13,7 +13,7 @@
 }
 \value{
 list \itemize{
-\item{ \strong{ punctuals} }{ summary of punctual actions (typeA=="p").}
+\item{ \strong{ punctual} }{ summary of punctual actions (typeA=="p").}
 \item{ \strong{ longs} }{  summary of long actions (typeA=="p"). }
 }
 }
