@@ -423,7 +423,7 @@ Formatting options include:
   * __rcircle__ : radius of informers circles
   * __lwdline__ : width of lines linking the 3 informers circles
   
-The complete list is available in the documentation of the `plot-ViSigrid-method` function, [here](https://cran.csiro.au/web/packages/ViSiElse/ViSiElse.pdf). 
+The complete list is available in the documentation of the `plot-ViSigrid-method` function, [here](https://CRAN.R-project.org/package=ViSiElse/ViSiElse.pdf). 
   
 ### ViSiElse-like plot with ggplot2 package
 
